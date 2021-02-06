@@ -1,4 +1,5 @@
-Reference:
+### Reference:
+``` lua
 	lovelyMoon.event.update(dt)
 	lovelyMoon.event.draw()
 	lovelyMoon.event.keypressed(key, scancode, isrepeat)
@@ -16,17 +17,19 @@ Reference:
 	lovelyMoon.switchState(currentID, nextID) -- calls :disable() on currentID and :enable() on nextID.
 	lovelyMoon.toggleState(id)		-- toggles the current state, calling :enable() if disabled or :disable() if enabled.
 	lovelyMoon.removeState(id)		-- removes state from lovelyMoon, returns removed state.
+```
 
-Usage:
-1. Add "lovelyMoon.lua" to your game directory (e.g. "/lib/lovelyMoon.lua").
-2. In main.lua, require the lovelyMoon module, and create a table to store your states:
+### Usage:
 
+1. Add ``lovelyMoon.lua`` to your game directory (e.g. ``/lib/lovelyMoon.lua``).
+2. In ``main.lua``, require the lovelyMoon module, and create a table to store your states:
+``` lua
 	lovelyMoon = require("lib.lovelyMoon")
 	states = {}
+```
 
-
-2. Inside love.load(), add states and enable first one: 
-
+2. Inside ``love.load()``, add states and enable first one: 
+``` lua
 	function love.load()
 		states.menu = lovelyMoon.loadState("states.menu", "menu") -- Argument 1 is file path for require, or a pre-existing state object.
 		states.game = lovelyMoon.loadState("states.game", "game") -- Argument 2 is the ID to assign to this state.
@@ -34,10 +37,10 @@ Usage:
 		
 		lovelyMoon.enableState("menu")
 	end
-	
+```
 
 3. Add lovelyMoon event functions to the standard LOVE callback events:
-
+``` lua
 	function love.update(dt)
 		lovelyMoon.event.update(dt)
 	end
@@ -65,10 +68,10 @@ Usage:
 	function love.wheelmoved(x, y)
 		lovelyMoon.event.wheelmoved(x, y)
 	end
+```
 
-
-4. Create the state module (e.g. "/states/menu.lua"):
-
+4. Create the state module (e.g. ``/states/menu.lua``):
+``` lua
 	local state = {}
 
 	function state:clone()
@@ -121,6 +124,6 @@ Usage:
 	end
 
 	return state
-	
+```
 
 5. That's all! Add your awesome code to your states' functions.
